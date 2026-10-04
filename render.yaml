@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: shopassist-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn shopassist_app:app --host 0.0.0.0 --port 10000
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false                   # Set this in Render dashboard
+      - key: LANGSMITH_API_KEY
+        sync: false                   # Set this in Render dashboard
+      - key: LANGSMITH_PROJECT
+        value: week16-shopassist
+      - key: LANGCHAIN_TRACING_V2
+        value: true
